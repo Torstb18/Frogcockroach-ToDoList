@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+</head>
+<label for = "usernameInput">Enter username</label>
+<input id = "usernameInput" type = "text"><br>
+
+<label for = "passwordInput">Enter password</label>
+<input id = "passwordInput" type = "password"><br>
+
+<button id = "loginBtn">Log in</button>
+<body>
+
+<script>
+let usernameInput = document.getElementById("usernameInput");
+let passwordInput = document.getElementById("passwordInput");
+let loginBtn = document.getElementById("loginBtn");
+
+let usernamePassword = null;
+
+loginBtn.addEventListener("click", async()=>{
+    const url = "/login";
+
+    let username = usernameInput.value
+    let password = passwordInput.value
+
+    usernamePassword = "Basic " + window.btoa(`${username}:${password}`)
+
+    const config = {
+        method: "get",
+        headers:{
+            "content-type": "application/json",
+            "authorization": usernamePassword
+        }
+    }
+    let response = await fetch(url, config);
+       if(response.status===200){
+           location.href="todo.html";
+       }
+})
+</script>
+    
+</body>
+</html>

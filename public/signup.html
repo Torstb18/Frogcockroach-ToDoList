@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+</head>
+<body>
+    <label for="userInput">Username</label>
+    <input id = "userInput" type="text"> <br>
+
+    <label for="passwordInput">Password</label>
+    <input id = "passwordInput" type="password"> <br>
+
+    <button id = "createBtn">Create user</button>
+
+</body>
+<script>
+    let userInput = document.getElementById("userInput");
+    let passwordInput = document.getElementById("passwordInput")
+    let createBtn = document.getElementById("createBtn");
+
+    createBtn.addEventListener("click", async()=>{
+        const url = "/createUser";
+        
+        const config={
+            method: "post",
+            body: JSON.stringify({
+                user: userInput.value,
+                password: passwordInput.value
+            }),
+            headers:{
+                "content-type": "application/json"
+            }
+        }
+        if (passwordInput.value.length < 1 || userInput.value.length < 1){
+           alert("Password & username needs at least 1 character.") 
+        }else{
+        let response = await fetch(url, config);
+        let responseMessage = await response.json();
+    }
+}
+    )
+</script>
+</html>
