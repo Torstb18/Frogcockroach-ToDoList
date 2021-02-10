@@ -13,12 +13,15 @@
 <input id = "passwordInput" type = "password"><br>
 
 <button id = "loginBtn">Log in</button>
+or
+<button id = "toCreateBtn">Create new user</button>
 <body>
 
 <script>
 let usernameInput = document.getElementById("usernameInput");
 let passwordInput = document.getElementById("passwordInput");
 let loginBtn = document.getElementById("loginBtn");
+let toCreateBtn = document.getElementById("toCreateBtn");
 
 let usernamePassword = null;
 
@@ -41,6 +44,10 @@ loginBtn.addEventListener("click", async()=>{
        if(response.status===200){
            location.href="todo.html";
        }
+});
+
+toCreateBtn.addEventListener("click", async()=>{
+    location.href = "signup.html";
 })
 </script>
     
