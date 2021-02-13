@@ -14,11 +14,14 @@
     <input id="passwordInput" type="password" /> <br />
 
     <button id="createBtn">Create user</button>
+    or
+    <button id = "toLoginBtn">Log in with existing user</button>
   </body>
   <script>
     let userInput = document.getElementById("userInput");
     let passwordInput = document.getElementById("passwordInput");
     let createBtn = document.getElementById("createBtn");
+    let toLoginBtn = document.getElementById("toLoginBtn");
 
     createBtn.addEventListener("click", async () => {
       const url = "/createUser";
@@ -40,5 +43,9 @@
         let responseMessage = await response.json();
       }
     });
+    
+    toLoginBtn.addEventListener("click", async()=>{
+    location.href = "login.html";
+})
   </script>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>startpage</title>
+  </head>
+  <body>
+    <button id="loginBtn">Login</button>
+    <button id="createUserBtn">Create User</button>
+
+    <script>
+      let loginBtn = document.getElementById("loginBtn");
+      let createUserBtn = document.getElementById("createUserBtn");
+
+      loginBtn.addEventListener("click", async () => {
+        location.href = "login.html";
+      });
+
+      createUserBtn.addEventListener("click", async () => {
+        location.href = "signup.html";
+      });
+    </script>
+  </body>
+</html>

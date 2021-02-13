@@ -1,4 +1,4 @@
-//lista oppgavene skal inn i
+/*//lista oppgavene skal inn i
 let tasks = [];
 
 //En oppgave
@@ -50,9 +50,9 @@ function addTask() {
   } else {
     addNewTask(whatTask);
     taskList();
-    
   }
 }
+
 
 //Krysser av oppgaver
 let completeTask = document.querySelector("ul");
@@ -70,7 +70,7 @@ input.addEventListener("keyup", function (event) {
   if (event.keyCode === 13) {
     document.getElementById("newTask").click();
   }
-});
+});*/
 
 
 

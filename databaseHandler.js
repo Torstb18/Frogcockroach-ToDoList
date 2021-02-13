@@ -32,6 +32,26 @@ class StorageHandler {
     return results;
   }
 
+  async insertItem(whatTask) {
+    const client = new pg.Client(this.credentials);
+    let results = null;
+    try {
+      await client.connect();
+      results = await client.query(
+        'INSERT INTO "public"."items"("itemName") VALUES($1) RETURNING *;',
+        [whatTask]
+      );
+      results = results.rows[0].message;
+      client.end();
+    } catch (err) {
+      client.end();
+      console.log(err);
+      results = err;
+    }
+
+    return results;
+  }
+
   async checkUser(username) {
     const client = new pg.Client(this.credentials);
     let results = null;
