@@ -71,6 +71,25 @@ class StorageHandler {
 
     return results;
   }
+
+  async getItem(getItem){
+ const client = new pg.Client(this.credentials);
+    let results = null;
+    try {
+      await client.connect();
+      results = await client.query(
+        "SELECT * FROM public.items ORDER BY id DESC",
+        [getItem]
+      );
+      client.end();
+    } catch (err) {
+      client.end();
+      console.log(err);
+      results = err;
+    }
+
+    return results;
+  }
 }
 
 module.exports = new StorageHandler(dbCredentials);

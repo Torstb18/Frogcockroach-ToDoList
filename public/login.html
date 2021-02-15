@@ -43,6 +43,8 @@ loginBtn.addEventListener("click", async()=>{
     let response = await fetch(url, config);
        if(response.status===200){
            location.href="todo.html";
+       }else{
+           alert("Feil brukernavn eller passord!")
        }
 });
 

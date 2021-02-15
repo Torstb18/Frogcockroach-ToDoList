@@ -7,12 +7,11 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(express.static("public",));
+app.use(express.static("public"));
 
-app.get('/', function(req, res){
-  res.sendfile('start.html', { root: __dirname + "/public" } );
+app.get("/", function (req, res) {
+  res.sendfile("start.html", { root: __dirname + "/public" });
 });
-
 
 let login = false;
 const auth = async (req, res, next) => {
@@ -72,12 +71,20 @@ app.post("/createItem", async (req, res) => {
   databaseHandler.insertItem(whatTask);
 });
 
-
 app.get("/login", auth, async (req, res) => {
   if (login) {
     res.status(200).end();
   } else {
     res.status(401).end();
+  }
+});
+
+app.get("/todoItem", async (req, res) => {
+  try {
+    let response = await databaseHandler.getItem();
+    res.status(200).json(response).end();
+  } catch (error) {
+    console.error(error);
   }
 });
 

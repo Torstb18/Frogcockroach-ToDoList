@@ -53,7 +53,10 @@ function getTask(index) {
 //listen der oppgavene vises
 let index = 0;
 
-function taskList() {
+async function taskList() {
+
+  
+  
   let i;
   for (i = index; i < tasks.length; i++) {
     let task = tasks[i];
@@ -74,6 +77,7 @@ function Delete(currentEl) {
 //legger til oppgaver
 let addTask = document.getElementById("newTask");
 addTask.addEventListener('click', async()=> {
+  event.preventDefault();
   let whatTask = document.getElementById("input").value;
   if (whatTask === "") {
     alert("Add a task!");
