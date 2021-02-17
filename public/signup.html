@@ -24,7 +24,7 @@
     let toLoginBtn = document.getElementById("toLoginBtn");
 
     createBtn.addEventListener("click", async () => {
-      const url = "/createUser";
+      const url = "/user";
 
       const config = {
         method: "post",
@@ -39,10 +39,11 @@
       if (passwordInput.value.length < 1 || userInput.value.length < 1) {
         alert("Password & username needs at least 1 character.");
       } else {
+        alert("user created!");
         let response = await fetch(url, config);
         let responseMessage = await response.json();
-      }
-    });
+        
+      }})
     
     toLoginBtn.addEventListener("click", async()=>{
     location.href = "login.html";

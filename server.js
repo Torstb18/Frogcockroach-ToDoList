@@ -3,8 +3,11 @@ const bodyParser = require("body-parser");
 const crypto = require("crypto");
 const secret = process.env.hashSecret || require("./localenv").hashSecret;
 const databaseHandler = require("./databaseHandler.js");
+const { response } = require("express");
+const { getItem } = require("./databaseHandler.js");
 const app = express();
 const PORT = process.env.PORT || 8080;
+
 
 app.use(express.json());
 app.use(express.static("public"));
@@ -48,7 +51,7 @@ const auth = async (req, res, next) => {
   next();
 };
 
-app.post("/createUser", async (req, res) => {
+app.post("/user", async (req, res) => {
   let username = req.body.user;
   let password = req.body.password;
 
@@ -63,12 +66,12 @@ app.post("/createUser", async (req, res) => {
   databaseHandler.insertUser(username, cryptPassword);
 });
 
-app.post("/createItem", async (req, res) => {
-  let whatTask = req.body.items;
+app.post("/item", async (req, res) => {
+  let todo = req.body.todo;
 
-  console.log(whatTask);
+  console.log(todo);
 
-  databaseHandler.insertItem(whatTask);
+  databaseHandler.insertItem(todo);
 });
 
 app.get("/login", auth, async (req, res) => {
@@ -80,13 +83,20 @@ app.get("/login", auth, async (req, res) => {
 });
 
 app.get("/todoItem", async (req, res) => {
-  try {
+  try{
     let response = await databaseHandler.getItem();
     res.status(200).json(response).end();
-  } catch (error) {
-    console.error(error);
+    console.table(response.row);
+  }catch(error){
+    console.error(error)
   }
+  
 });
+
+app.post("/delTodo", async (req, res)=>{
+  
+})
+
 
 app.listen(PORT, () => {
   console.log("Running on port: " + PORT);

@@ -1,3 +1,4 @@
+const { response } = require("express");
 const pg = require("pg");
 const dbCredentials =
   process.env.DATABASE_URL || require("./localenv").credentials;
@@ -32,14 +33,14 @@ class StorageHandler {
     return results;
   }
 
-  async insertItem(whatTask) {
+  async insertItem(todo) {
     const client = new pg.Client(this.credentials);
     let results = null;
     try {
       await client.connect();
       results = await client.query(
         'INSERT INTO "public"."items"("itemName") VALUES($1) RETURNING *;',
-        [whatTask]
+        [todo]
       );
       results = results.rows[0].message;
       client.end();
@@ -72,15 +73,16 @@ class StorageHandler {
     return results;
   }
 
-  async getItem(getItem){
+  async getItem(){
  const client = new pg.Client(this.credentials);
-    let results = null;
+ let results = null;
     try {
-      await client.connect();
+      await client.connect()
+      .then (()=>console.log("connected"))
       results = await client.query(
-        "SELECT * FROM public.items ORDER BY id DESC",
-        [getItem]
+        'SELECT "itemName" FROM public.items'
       );
+      console.log(results.rows);
       client.end();
     } catch (err) {
       client.end();
@@ -90,6 +92,25 @@ class StorageHandler {
 
     return results;
   }
+
+  /*async delTodo(id, todo){
+    const client = new pg.Client(this.credentials);
+    let results = null;
+    results = await client.query(
+      'DELETE FROM "itemName" WHERE items.id = $1'
+    )
+    try{
+      await client.connect();
+      results = await client.query(results);
+      client.end();
+      console.log(results);
+    }catch(err){
+      client.end();
+      console.error(err);
+      results=err;
+    }
+    return results;
+  }*/
 }
 
 module.exports = new StorageHandler(dbCredentials);
