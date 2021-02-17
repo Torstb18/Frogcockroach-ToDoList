@@ -1,0 +1,74 @@
+body,
+html {
+  margin: 0;
+  padding: 20px;
+}
+
+body {
+  background-color: #dbd7cf;
+  min-width: 250px;
+}
+
+div {
+  display: block;
+  width: 90%;
+  margin: auto;
+  background-color: #dbd7cf;
+}
+
+.button1 {
+    margin: 0;
+    margin-left: 180px;
+    background: rgb(243, 244, 245);
+    border: solid 1px;
+    border-color: black;
+    color: rgb(27, 90, 27);
+    font-size: 16px;
+    padding: 5px;
+    width: 20%;
+    font-family: "times new roman", cursive !important;
+    cursor: pointer;
+    float: center;
+  }
+  
+  button:hover {
+    background-color: rgb(182, 163, 163);
+  }
+  
+  .button2 {
+    margin: 0;
+    background: rgb(243, 244, 245);
+    border: solid 1px;
+    border-color: black;
+    color: rgb(27, 90, 27);
+    font-size: 16px;
+    padding: 5px;
+    width: 20%;
+    font-family: "times new roman", cursive !important;
+    cursor: pointer;
+   
+  }
+
+  input {
+    margin-bottom: 10px;
+    margin-left: 1%;
+    border: solid 1px;
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgb(211, 211, 212);
+  
+  }
+
+  label {
+    width: 1%;
+    height: 0px;
+    text-align: center;
+    color: rgb(129, 53, 63);
+    font-family: "times new roman", cursive !important;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 25px;
+    background-color: #dbd7cf;
+    padding: 0px 10px;
+  }
