@@ -73,15 +73,12 @@ class StorageHandler {
     return results;
   }
 
-  async getItem(){
- const client = new pg.Client(this.credentials);
- let results = null;
+  async getItem() {
+    const client = new pg.Client(this.credentials);
+    let results = null;
     try {
-      await client.connect()
-      .then (()=>console.log("connected"))
-      results = await client.query(
-        'SELECT "itemName" FROM public.items'
-      );
+      await client.connect().then(() => console.log("connected"));
+      results = await client.query('SELECT "itemName" FROM public.items');
       console.log(results.rows);
       client.end();
     } catch (err) {
@@ -93,24 +90,25 @@ class StorageHandler {
     return results;
   }
 
-  /*async delTodo(id, todo){
+  async delTodo(id) {
     const client = new pg.Client(this.credentials);
     let results = null;
     results = await client.query(
-      'DELETE FROM "itemName" WHERE items.id = $1'
-    )
-    try{
+      'DELETE FROM "public"."items" WHERE items.id = $1',
+      [id]
+    );
+    try {
       await client.connect();
       results = await client.query(results);
       client.end();
       console.log(results);
-    }catch(err){
+    } catch (err) {
       client.end();
       console.error(err);
-      results=err;
+      results = err;
     }
     return results;
-  }*/
+  }
 }
 
 module.exports = new StorageHandler(dbCredentials);

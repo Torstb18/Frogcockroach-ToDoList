@@ -93,9 +93,12 @@ app.get("/todoItem", async (req, res) => {
   
 });
 
-app.post("/delTodo", async (req, res)=>{
-  
-})
+app.delete("/delTodo", async (req, res)=>{
+  const newDelTodo = new delTodo(req.body.id, req.body.itemName);
+  await newDelTodo.loadData();
+  res.status(200).json(newDelTodo).end();
+  console.log(req.body);
+});
 
 
 app.listen(PORT, () => {

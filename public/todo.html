@@ -19,6 +19,7 @@
               <container id="content">
                 <input type="text" id="input">
                 <button class="button button1" id="newTask">Add task</button>
+                <button class="button button1" id="delBtn">Delete task</button>
                 <ul id="myList">
                   
                 </ul>
@@ -28,6 +29,7 @@
     </div>    
 
     <script>
+let delBtn = document.getElementById("delBtn");
 let todo = document.getElementById("input");
 document.getElementById("newTask").onclick = function(evt){
 
@@ -44,13 +46,16 @@ document.getElementById("newTask").onclick = function(evt){
   fetch("/item", cfg).then(resp => {
                 console.log(resp.status)
             })
+            setTimeout(function(){
+                location.reload();
+            })
 }
 
 let listContainer = document.getElementById("myList");
 
-loadData();
+loadTasks();
 
-async function loadData(){
+async function loadTasks(){
 
 let cfg = {
   method: "get",
@@ -60,18 +65,16 @@ try{
   let response = await fetch ("/todoItem", cfg);
   let data = await response.json();
   console.log(data);
-
+  
   for(let todoData of data.rows){
     let div = document.createElement("div");
     let html =`
-    <h2>${todoData.todo}</h2>
-    <ul>
-      <button id="delBtn">Delete Task</button>
+    <li>
+    <h2>${todoData.itemName}</h2>
         `
         div.innerHTML = html;
         listContainer.appendChild(div);
-        document.getElementById("delBtn").onclick = function(evt){
-          console.log("deleted");
+        
           let body={
             todo: todo.value
           }
@@ -81,17 +84,25 @@ try{
               "content-type": "application/json"
             },
             body:JSON.stringify(body)
-          }
-          fetch("/delTodo", cfg).then(res =>{
-            console.log(res.status)
-          })
         }
-    
+      }
+    }catch(err){ 
   }
-}catch(err){
-  
 }
-}
+
+delBtn.addEventListener("click", async()=>{
+ let cfg = {
+   method: "delete",
+   headers: {
+     "content-type": "application/json"
+   }
+ }
+ fetch("/delTodo", cfg);
+ setTimeout(function(){
+                location.reload();
+            })
+})
+
 
       
     </script>
