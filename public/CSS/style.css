@@ -48,7 +48,7 @@ button:hover {
   background-color: rgb(182, 163, 163);
 }
 
-.button {
+#delTask {
   margin: 0;
   background: rgb(243, 244, 245);
   border-bottom-right-radius: 10px;
