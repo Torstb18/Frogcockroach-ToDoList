@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css"   href="./CSS/login.css">
-    <title>Login </title>
-</head>
-<label for = "usernameInput">Enter username</label>
-<input id = "usernameInput" type = "text"><br>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./CSS/login.css" />
+    <title>Login</title>
+  </head>
+  <label for="usernameInput">Enter username</label>
+  <input id="usernameInput" type="text" /><br />
 
-<label for = "passwordInput">Enter password</label>
-<input id = "passwordInput" type = "password"><br>
+  <label for="passwordInput">Enter password</label>
+  <input id="passwordInput" type="password" /><br />
 
-<button class="button button1" id = "loginBtn">Log in</button>
-or
-<button class="button button2" id = "toCreateBtn">Create new user</button>
-<body>
+  <button class="button button1" id="loginBtn">Log in</button>
+  or
+  <button class="button button2" id="toCreateBtn">Create new user</button>
+  <body>
+    <script>
+      let usernameInput = document.getElementById("usernameInput");
+      let passwordInput = document.getElementById("passwordInput");
+      let loginBtn = document.getElementById("loginBtn");
+      let toCreateBtn = document.getElementById("toCreateBtn");
 
-<script>
-let usernameInput = document.getElementById("usernameInput");
-let passwordInput = document.getElementById("passwordInput");
-let loginBtn = document.getElementById("loginBtn");
-let toCreateBtn = document.getElementById("toCreateBtn");
+      let usernamePassword = null;
 
-let usernamePassword = null;
+      loginBtn.addEventListener("click", async () => {
+        const url = "/login";
 
-loginBtn.addEventListener("click", async()=>{
-    const url = "/login";
+        let username = usernameInput.value;
+        let password = passwordInput.value;
 
-    let username = usernameInput.value
-    let password = passwordInput.value
+        usernamePassword = "Basic " + window.btoa(`${username}:${password}`);
 
-    usernamePassword = "Basic " + window.btoa(`${username}:${password}`)
-
-    const config = {
-        method: "get",
-        headers:{
+        const config = {
+          method: "get",
+          headers: {
             "content-type": "application/json",
-            "authorization": usernamePassword
+            authorization: usernamePassword,
+          },
+        };
+        let response = await fetch(url, config);
+        if (response.status === 200) {
+          location.href = "todo.html";
+        } else {
+          alert("Feil brukernavn eller passord!");
         }
-    }
-    let response = await fetch(url, config);
-       if(response.status===200){
-           location.href="todo.html";
-       }else{
-           alert("Feil brukernavn eller passord!")
-       }
-});
+      });
 
-toCreateBtn.addEventListener("click", async()=>{
-    location.href = "signup.html";
-})
-</script>
-    
-</body>
+      toCreateBtn.addEventListener("click", async () => {
+        location.href = "signup.html";
+      });
+    </script>
+  </body>
 </html>

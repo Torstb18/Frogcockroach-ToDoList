@@ -107,8 +107,7 @@ class StorageHandler {
       console.error(err);
       results = err;
     }
-   
-  }
+  };
 }
 
 module.exports = new StorageHandler(dbCredentials);

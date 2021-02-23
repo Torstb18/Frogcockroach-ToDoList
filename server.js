@@ -83,23 +83,22 @@ app.get("/login", auth, async (req, res) => {
 });
 
 app.get("/todoItem", async (req, res) => {
-  try{
+  try {
     let response = await databaseHandler.getItem();
     res.status(200).json(response).end();
     console.table(response.row);
-  }catch(error){
-    console.error(error)
+  } catch (error) {
+    console.error(error);
   }
-  
+
 });
 
-app.delete("/delTodo", async (req, res)=>{
-
+app.delete("/delTodo", async (req, res) => {
   let result = await databaseHandler.delTodo(req.body.id);
-  if (result){
-    res.status(200).end()
-  }else{
-    res.status(400).end()
+  if (result) {
+    res.status(200).end();
+  } else {
+    res.status(400).end();
   }
 });
 
