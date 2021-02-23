@@ -70,7 +70,6 @@ try{
     let html =`
     <li>
     <h2>${todoData.itemName}</h2>
-    <button class="button button2" onclick="deleteTask(this);">Remove</button></li>
         `
         listItem.innerHTML = html;
         listContainer.appendChild(listItem);
@@ -107,7 +106,7 @@ try{
           headers: headers
         }
         let response = await fetch("/delTodo", cfg);
-        console.log(todoData.id)
+        
       })
       }
     }catch(err){ 
