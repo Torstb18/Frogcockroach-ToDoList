@@ -93,13 +93,12 @@ class StorageHandler {
   async delTodo(id) {
     const client = new pg.Client(this.credentials);
     let results = null;
-    results = await client.query(
-      'DELETE FROM "public"."items" WHERE items.id = $1',
-      [id]
-    );
     try {
       await client.connect();
-      results = await client.query(results);
+      results = await client.query(
+        'DELETE FROM "public"."items" WHERE items.id = $1',
+        [id]
+      );
       client.end();
       console.log(results);
     } catch (err) {
@@ -107,7 +106,7 @@ class StorageHandler {
       console.error(err);
       results = err;
     }
-    return results;
+   
   }
 }
 

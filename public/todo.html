@@ -19,7 +19,6 @@
               <container id="content">
                 <input type="text" id="input">
                 <button class="button button1" id="newTask">Add task</button>
-                <button class="button button1" id="delBtn">Delete task</button>
                 <ul id="myList">
                   
                 </ul>
@@ -29,7 +28,7 @@
     </div>    
 
     <script>
-let delBtn = document.getElementById("delBtn");
+
 let todo = document.getElementById("input");
 document.getElementById("newTask").onclick = function(evt){
 
@@ -53,7 +52,7 @@ document.getElementById("newTask").onclick = function(evt){
 
 let listContainer = document.getElementById("myList");
 
-loadTasks();
+
 
 async function loadTasks(){
 
@@ -67,13 +66,14 @@ try{
   console.log(data);
   
   for(let todoData of data.rows){
-    let div = document.createElement("div");
+    let listItem = document.createElement("div");
     let html =`
     <li>
     <h2>${todoData.itemName}</h2>
+    <button class="button button2" onclick="deleteTask(this);">Remove</button></li>
         `
-        div.innerHTML = html;
-        listContainer.appendChild(div);
+        listItem.innerHTML = html;
+        listContainer.appendChild(listItem);
         
           let body={
             todo: todo.value
@@ -85,23 +85,47 @@ try{
             },
             body:JSON.stringify(body)
         }
+        delTask = document.createElement("button");
+        delTask.innerHTML = "Delete task";
+        listItem.appendChild(delTask);
+
+      delTask.addEventListener("click", async function (evt){
+        listContainer.removeChild(listItem);
+        let url = "/delTodo";
+        let body = {
+          id: todoData.id
+        };
+        let headers = {
+          "content-type": "application/json"
+        }
+        let cfg = {
+          method: "delete",
+          body: JSON.stringify(body),
+          headers: headers
+        }
+        let response = await fetch(url, cfg);
+      })
       }
     }catch(err){ 
   }
 }
 
-delBtn.addEventListener("click", async()=>{
- let cfg = {
+/*async function deleteTask(currentEl) {
+  currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
+  let cfg = {
    method: "delete",
-   headers: {
-     "content-type": "application/json"
-   }
- }
- fetch("/delTodo", cfg);
- setTimeout(function(){
-                location.reload();
-            })
-})
+   headers: {"content-type": "application/json"}
+ }   
+  let response = await fetch("/delTodo", cfg);
+  let data = await response.json();
+
+body={
+  id: JSON.stringify(data.id)
+}
+}*/
+
+
+loadTasks();
 
 
       

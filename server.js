@@ -94,10 +94,13 @@ app.get("/todoItem", async (req, res) => {
 });
 
 app.delete("/delTodo", async (req, res)=>{
-  const newDelTodo = new delTodo(req.body.id, req.body.itemName);
-  await newDelTodo.loadData();
-  res.status(200).json(newDelTodo).end();
-  console.log(req.body);
+
+  let result = await databaseHandler.delTodo(req.body.id);
+  if (result){
+    res.status(200).end()
+  }else{
+    res.status(400).end()
+  }
 });
 
 
