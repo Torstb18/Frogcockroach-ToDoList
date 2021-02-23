@@ -85,13 +85,16 @@ try{
             },
             body:JSON.stringify(body)
         }
+
+       
+
         delTask = document.createElement("button");
         delTask.innerHTML = "Delete task";
         listItem.appendChild(delTask);
 
       delTask.addEventListener("click", async function (evt){
         listContainer.removeChild(listItem);
-        let url = "/delTodo";
+        
         let body = {
           id: todoData.id
         };
@@ -103,7 +106,8 @@ try{
           body: JSON.stringify(body),
           headers: headers
         }
-        let response = await fetch(url, cfg);
+        let response = await fetch("/delTodo", cfg);
+        console.log(todoData.id)
       })
       }
     }catch(err){ 

@@ -78,7 +78,7 @@ class StorageHandler {
     let results = null;
     try {
       await client.connect().then(() => console.log("connected"));
-      results = await client.query('SELECT "itemName" FROM public.items');
+      results = await client.query('SELECT "itemName", "id" FROM public.items');
       console.log(results.rows);
       client.end();
     } catch (err) {
@@ -96,11 +96,12 @@ class StorageHandler {
     try {
       await client.connect();
       results = await client.query(
-        'DELETE FROM "public"."items" WHERE items.id = $1',
+        'DELETE FROM "public"."items" WHERE id = $1',
         [id]
       );
       client.end();
       console.log(results);
+      return results;
     } catch (err) {
       client.end();
       console.error(err);
