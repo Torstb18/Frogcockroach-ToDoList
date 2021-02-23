@@ -123,19 +123,7 @@ listContainer.addEventListener('click', function (event) {
   }
 }
 
-/*async function deleteTask(currentEl) {
-  currentEl.parentNode.parentNode.removeChild(currentEl.parentNode);
-  let cfg = {
-   method: "delete",
-   headers: {"content-type": "application/json"}
- }   
-  let response = await fetch("/delTodo", cfg);
-  let data = await response.json();
 
-body={
-  id: JSON.stringify(data.id)
-}
-}*/
 
 
 loadTasks();
