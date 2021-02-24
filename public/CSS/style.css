@@ -29,6 +29,10 @@ h1 {
   padding: 30px 10px;
 }
 
+h2{
+  pointer-events: none;
+}
+
 .button1 {
   margin: 0;
   background: rgb(243, 244, 245);
@@ -48,17 +52,18 @@ button:hover {
   background-color: rgb(182, 163, 163);
 }
 
-#delTask {
-  margin: 0;
+.button2 {
+  margin: -100px;
+  margin-right: 30px;
+  position:relative;
   background: rgb(243, 244, 245);
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
   color: rgb(27, 90, 27);
   font-size: 16px;
-  padding: 0px;
-  width: 20%;
+  padding: 20px;
+  padding-right: 10px;
+  width: 14%;
   font-family: "times new roman", cursive !important;
   cursor: pointer;
   float: right;
@@ -97,12 +102,12 @@ ul {
 ul li {
   cursor: pointer;
   position: relative;
-  padding: 12px 8px 12px 40px;
+  padding: 12px 8px 12px 50px;
   list-style-type: none;
   background: rgb(182, 163, 163);
   font-size: 18px;
-  width: 50%;
-  margin: 10px auto;
+  width: 60%;
+  margin: 20px auto;
   font-family: "times new roman", cursive !important;
 }
 
@@ -115,15 +120,25 @@ ul li.checked::before {
   content: "";
   position: absolute;
   border-color: rgb(7, 212, 34);
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
+  border-style: ridge;
+  border-width: 0 5px 5px 0;
+  top: 28px;
   left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
+  transform: rotate(40deg);
+  height: 25px;
+  width: 13px;
 }
 
 ul li:nth-child(even) {
   background: #f9f9f9;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 }
