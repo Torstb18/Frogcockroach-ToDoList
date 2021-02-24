@@ -29,6 +29,10 @@ h1 {
   padding: 30px 10px;
 }
 
+h2{
+  pointer-events: none;
+}
+
 .button1 {
   margin: 0;
   background: rgb(243, 244, 245);
