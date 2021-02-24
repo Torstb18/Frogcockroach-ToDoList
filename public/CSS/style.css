@@ -51,6 +51,7 @@ button:hover {
 .button2 {
   margin: -100px;
   margin-right: 30px;
+  position:relative;
   background: rgb(243, 244, 245);
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
