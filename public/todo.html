@@ -54,7 +54,7 @@ let listContainer = document.getElementById("myList");
 
 
 
-async function loadTasks(){
+async function taskList(){
 
 let cfg = {
   method: "get",
@@ -85,12 +85,12 @@ try{
             body:JSON.stringify(body)
         }
 
-//Check fungerer ikke der det er tekst
 listContainer.addEventListener('click', function (event) {
     if (event.target.tagName === "LI") {
       event.target.classList.toggle("checked");
     }
 });
+
 
 
        
@@ -125,7 +125,7 @@ listContainer.addEventListener('click', function (event) {
 
 
 
-loadTasks();
+taskList();
 
 
       
